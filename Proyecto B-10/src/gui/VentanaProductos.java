@@ -1,15 +1,46 @@
 package gui;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VentanaPrincipal extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneLayout;
 
-	public VentanaPrincipal() {
+public class VentanaProductos extends JFrame {
+	int productoActual = 0;
+	int hastaProducto = 4;
+	JPanel panelCatalogo = new JPanel();
+
+	private void cargarMas() {
+		for (; productoActual <= hastaProducto; productoActual++) {
+			// actual.add(productos[productoActual].getImagen());
+			// actual.add(new JLabel("texto "+productoActual));
+			panelCatalogo.add(new JLabel("imagen " + productoActual));
+			panelCatalogo.add(new JLabel("texto " + productoActual));
+			validate();
+		}
+	}
+
+	public VentanaProductos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Ventana Principal");
-		setLayout(new GridLayout(2, 1));
+		setTitle("Ventana Productos");
+		JScrollPane scroll = new JScrollPane(panelCatalogo);
+		scroll.setLayout(new ScrollPaneLayout());
+		scroll.getVerticalScrollBar().setUnitIncrement(16);
+
+		panelCatalogo.setLayout(new GridLayout(0, 2));
+
+		JButton verMas = new JButton("Ver mas.");
 
 		// Menú
 		JMenuBar barra = new JMenuBar();
@@ -63,26 +94,28 @@ public class VentanaPrincipal extends JFrame {
 		barra.add(iniciarSesion);
 		barra.add(registrarse);
 
-		JPanel superior = new JPanel();
-		JPanel inferiores = new JPanel();
-		JPanel izquierdo = new JPanel();
-		JPanel derecho = new JPanel();
-		JLabel titulo = new JLabel("Destacados/Ofertas");
+		cargarMas();
 
-		// superior.setBorder(BorderFactory.createEmptyBorder(200, 20, 20, 20));
+		panelCatalogo.add(verMas);
 
-		inferiores.setLayout(new GridLayout(1, 2));
+		verMas.addActionListener(new ActionListener() {
 
-		superior.add(titulo);
-		inferiores.add(izquierdo);
-		inferiores.add(derecho);
-
-		add(superior);
-		add(inferiores);
-
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				hastaProducto += 5;
+				panelCatalogo.remove(verMas);
+				cargarMas();
+				panelCatalogo.add(verMas);
+			}
+		});
+		pack();
 		setVisible(true);
 		setSize(800, 600);
+		add(scroll);
 
 	}
 
+	public static void main(String[] args) {
+		new VentanaProductos();
+	}
 }
