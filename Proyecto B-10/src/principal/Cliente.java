@@ -72,7 +72,7 @@ public class Cliente {
 				@Override
 				public void windowClosing(WindowEvent e) {
 					System.out.println("Cliente finaliza conexion");
-					hc.fin();
+					//hc.fin();
 				}
 			});
     		//TIEMPO ACTUALIZACION PEDIDOS
@@ -81,10 +81,17 @@ public class Cliente {
 			timer.setInitialDelay(0);
 			timer.start();
 
-			actualizarPedidos(null);
+			/*actualizarPedidos(null);
 			
 			public void actualizarPedidos() {}
 			public void solicitarPedido() {}
+			*/
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 		

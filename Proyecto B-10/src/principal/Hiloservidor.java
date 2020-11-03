@@ -1,5 +1,6 @@
 package principal;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,7 +20,7 @@ public class Hiloservidor extends Thread{
 	private boolean funcionando = true;
 	
 	public void Hiloservidor(Socket socket, int cliente, Servidor srv) {
-        super("ServerThread");
+        //super("ServerThread");
         this.socket = socket;
         this.cliente = cliente;
         this.srv = srv;
@@ -32,7 +33,10 @@ public class Hiloservidor extends Thread{
 			
 			oou = new ObjectOutputStream(socket.getOutputStream());
         	oin = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+        	//
         }
+     
         	
 	
         
