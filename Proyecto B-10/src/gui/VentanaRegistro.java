@@ -1,7 +1,11 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class VentanaRegistro extends JFrame {
 
@@ -23,33 +27,45 @@ public class VentanaRegistro extends JFrame {
 
 		setLayout(new GridLayout(7, 1));
 
-		JPanel pNombre = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pNombre = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		pNombre.add(lNombre);
 		pNombre.add(tNombre);
 		add(pNombre);
 
-		JPanel pContrasenya = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pContrasenya = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		pContrasenya.add(lContrasenya);
 		pContrasenya.add(tContrasenya);
 		add(pContrasenya);
 
-		JPanel pCorreo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pCorreo = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		pCorreo.add(lCorreo);
 		pCorreo.add(tCorreo);
 		add(pCorreo);
 
-		JPanel pFechaNacimiento = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pFechaNacimiento = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		pFechaNacimiento.add(lFechaNacimiento);
 		pFechaNacimiento.add(tFechaNacimiento);
 		add(pFechaNacimiento);
 
-		JPanel pDireccion = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel pDireccion = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		pDireccion.add(lDireccion);
 		pDireccion.add(tDirección);
 		add(pDireccion);
 
 		// En obras
-		add(new JLabel("No soy un robot"));
+		JPanel pRobot= new JPanel(new FlowLayout(FlowLayout.CENTER));
+		pRobot.add(new JLabel("No soy un robot"));
+		pRobot.add(new JCheckBox());
+		add(pRobot);
+		
+		bRegistrarse.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipal.ventana.dispose();
+				VentanaPrincipal.ventana=new VentanaPrincipal();
+			}
+		});
 
 		add(bRegistrarse);
 
@@ -57,15 +73,5 @@ public class VentanaRegistro extends JFrame {
 		setSize(800, 600);
 	}
 
-	public static void main(String[] args) {
-
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				new VentanaRegistro();
-			}
-
-		});
-	}
+	
 }
